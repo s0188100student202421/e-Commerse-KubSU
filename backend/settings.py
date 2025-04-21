@@ -14,9 +14,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = 'django-insecure-i-b2o_4@ru#jr_y)vbhdjng$607jjufk4i8b+*wrk0p&!ae%-e'
+
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'otakuhouse.herokuapp.com']
+#ALLOWED_HOSTS = ['localhost', '127.0.0.1', '']
 
 
 # Application definition
@@ -98,19 +98,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-"""
-# Database — переключаемся на PostgreSQL
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',    # ИЗМЕНЕНО: заменил sqlite на postgresql
-        #'NAME': '',                          # ИЗМЕНЕНО: название вашей БД
-        #'USER': '',                        # ИЗМЕНЕНО: пользователь БД
-        #'PASSWORD': '',                  # ИЗМЕНЕНО: пароль к БД
-        #'HOST': '',                          # ИЗМЕНЕНО: адрес сервера БД
-        #'PORT': '',                               # ИЗМЕНЕНО: порт PostgreSQL
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "mydb",
+        "USER": "djangouser",
+        "PASSWORD": "django",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
-"""
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
