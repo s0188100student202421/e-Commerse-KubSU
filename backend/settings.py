@@ -12,6 +12,8 @@ from datetime import timedelta  # ИЗМЕНЕНО: перенёс сюда impo
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ДЛЯ БД
+SECRET_KEY = 'django-insecure-w03d9o8+t2*p@w874-tjcr86^azlmu(+gt7e7*y6j=@#3ou9ff'
 
 # Quick-start development settings - unsuitable for production
 
