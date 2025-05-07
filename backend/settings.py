@@ -68,7 +68,7 @@ SIMPLE_JWT = {
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+   # 'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -105,7 +105,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "mydb",
         "USER": "djangouser",
-        "PASSWORD": "django",
+        "PASSWORD": "",
         "HOST": "localhost",
         "PORT": "5432",
     }
