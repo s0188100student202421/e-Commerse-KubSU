@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Sneaker, Cart, CartItem, User
+from django.contrib.auth.hashers import make_password
 
 class SneakerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -21,3 +22,21 @@ class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ['id', 'user_id', 'total_amount', 'is_paid', 'items']
+
+class UserRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'password', 'phone', 'gender', 
+                 'birth_date', 'passport_series', 'passport_number']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data['password'])
+        return super().create(validated_data)
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'phone', 'gender', 
+                 'birth_date', 'passport_series', 'passport_number']
+        read_only_fields = ['email']
