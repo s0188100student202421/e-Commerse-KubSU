@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Sneaker, Cart, CartItem, User
+from .models import Sneaker, Cart, CartItem, User, Feedback
 from django.contrib.auth.hashers import make_password
 
 class SneakerSerializer(serializers.ModelSerializer):
@@ -40,3 +40,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'email', 'phone', 'gender', 
                  'birth_date', 'passport_series', 'passport_number']
         read_only_fields = ['email']
+
+class UserLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)

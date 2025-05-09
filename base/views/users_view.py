@@ -5,7 +5,8 @@ import jwt
 from datetime import datetime, timedelta
 from django.conf import settings
 from ..models import User
-from ..serializers import UserRegisterSerializer, UserProfileSerializer
+from ..serializers import UserRegisterSerializer, UserProfileSerializer, UserLoginSerializer
+from django.contrib.auth.hashers import check_password
 
 def generate_jwt(user):
     payload = {
@@ -62,3 +63,20 @@ class UserProfileView(APIView):
             
         except (jwt.ExpiredSignatureError, jwt.DecodeError):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+class LoginView(APIView):
+    def post(self, request):
+        serializer = UserLoginSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            password = serializer.validated_data['password']
+            try:
+                user = User.objects.get(email=email)
+                if check_password(password, user.password):
+                    token = generate_jwt(user)
+                    return Response({'token': token}, status=status.HTTP_200_OK)
+                else:
+                    return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+            except User.DoesNotExist:
+                return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
